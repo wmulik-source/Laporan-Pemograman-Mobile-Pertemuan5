@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
+import '../models/post.dart';
 
 class ApiService {
 static const String _baseUrl = 'https://jsonplaceholder.typicode.com';
@@ -57,6 +58,23 @@ throw Exception('Tidak ada koneksi internet. Periksa jaringan Anda.');
 } catch (e) {
 throw Exception('Terjadi kesalahan: $e');
 }
+}
+// GET /posts (Latihan 3)
+Future<List<Post>> getPosts() async {
+  try {
+    final response = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+    ).timeout(_timeout);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(response.body);
+      return data.map((json) => Post.fromJson(json)).toList();
+    } else {
+      throw HttpException('Gagal memuat data posts. Status: ${response.statusCode}');
+    }
+  } catch (e) {
+    throw Exception('Terjadi kesalahan: $e');
+  }
 }
 // Simulasi login untuk mendapatkan token
 

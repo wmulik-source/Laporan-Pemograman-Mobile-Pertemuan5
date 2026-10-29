@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
+import 'screens/login_screen.dart';
 void main() {
 runApp(const MyApp());
 }
@@ -14,7 +15,7 @@ theme: ThemeData(
 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
 useMaterial3: true,
 ),
-home: const HomeScreen(),
+home: const LoginScreen(),
 );
 }
 }
